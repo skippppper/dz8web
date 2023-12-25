@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skipper</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="skript/script.js" defer></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="button_block">
+            <button type="button" class="button_form" id="btn_form">Форма</button>
+        </div>
+        <div class="bigtext">
+            <h1 class="color">Описание хамелеона</h1>
+            <div class="text">
+                Средняя длина хамелеона около <a class="color">30 см</a>, самые крупные хамелеоны вырастают до 65-68 см, размер самых маленьких ящериц не превышает 3-5 см.
+            </div>
+            <br>
+            <div class="text">
+                Голова часто украшена гребнем или рогами. Ноги длинные, пальцы имеют вид<a class="color"> «клешней»</a>, которые могут плотно обхватывать ветви дерева. Хвост толстый у основания, постепенно сужается к концу, может <a class="color">спирально</a> закручиваться вниз и обвиваться вокруг ветвей.
+            </div>
+            <br>
+            <div class="text">
+                Хамелеоны имеют необычные органы зрения. Веки животных <a class="color">сросшиеся</a>, постоянно покрывающие глаз, но имеющие отверстие для зрачка. Движения левого и правого глаз могут осуществляться независимо друг от друга, что имеет важное значение при ловле насекомых. Хамелеоны обладают круговым обзором.
+            </div>
+            <br>
+            <div class="text">
+                Язык хамелеона оснащен ловчей присоской, расположенной на самом конце. Это помогает ему быстро ловить добычу. Окраска хамелеона может быстро изменяться от светлой до чёрной или тёмно-коричневой.
+            </div>
+        </div>
+    </div>
+
+    <div class="popup_block" id="popup">
+        <div class="popup">
+            <div class="close" id="popup_close">
+                <p>X</p>
+            </div>
+            <div class="popup_content" id="popup_content">
+                <form
+                    id="myForm"
+                    class="ajaxForm" 
+                    action="https://formcarry.com/s/tIRxDpkELM"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+                    <h1>Форма обратной связи:</h1>
+                    <input class="inp" name="Email" type="text" placeholder="Ф.И.О." required>
+                    <input class="inp" name="Tell" type="email" placeholder="petyapupkin@gmail.com" required>
+                    <input class="inp" name="Conpuny" type="tel" placeholder="+71827364500" required> 
+                    <input class="inp" name="Massage" type="text" placeholder="Ваша Организация" required> 
+                    <textarea name="describe" cols="30" rows="7" id="textArea"></textarea>
+                    <p>
+                        <input type="checkbox" class="check" required>
+                        Я согласен на обработку моих данных
+                    </p>
+                    <input type="submit" value="Отправить" class="popup_inp" id="popup_inp" required>
+                    <br>
+                </form>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+                <script>
+                    $(function(){
+                        const form = document.getElementById('myForm');
+                        const inputs = form.querySelectorAll('input');
+                        let textArea = document.getElementById('textArea');
+
+                        $(".ajaxForm").submit(function(e){
+                        e.preventDefault();
+                        var href = $(this).attr("action");
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: href,
+                            data: $(this).serialize(),
+                            success: function(response){
+                            if(response.status == "success"){
+                                alert("We received your submission, thank you!");
+                                inputs.forEach((element)=>{
+                                    element.value = "";
+                                })
+                                inputs[5].value = "Отправить";
+                                inputs[4].checked = null;
+                                textArea.value = "";
+                            }else{
+                                alert("An error occured: " + response.message);
+                                inputs.forEach((element)=>{
+                                    element.value = "";
+                                })
+                                inputs[5].value = "Отправить";
+                                inputs[4].checked = null;
+                                textArea.value = "";
+                            }
+                            }
+                        });
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
